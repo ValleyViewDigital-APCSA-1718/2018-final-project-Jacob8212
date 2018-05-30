@@ -1,0 +1,72 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Jacob Navarro
+ * CSA Game
+ * Period 4
+ */
+public class Rocket extends Actor
+{
+    private int targetx=0, targety=0;
+    private int thanos = 0;
+    private boolean toRemove = false;
+    
+    public void addedToWorld(World Space)
+    {
+        targetx = getX(); targety = getY();
+    }// end addedToWorld
+    
+    public void move()
+    {
+        double rx=targetx-getX();
+        double ry=targety-getY();
+        double r=Math.sqrt(rx*rx+ry*ry);
+        int bta = 5;
+        int posx=0, posy=0;
+        
+        if(r>bta)
+        {
+            posx=(int)(getX() + bta*rx/r);
+            posy=(int)(getY() + bta*ry/r);
+            
+        }// end if
+        else
+        {
+            posx=targetx;
+            posy=targety;
+        }// end  else
+        
+        setLocation(posx,posy);
+    }//end move method
+    
+    public void act() 
+    {
+        if(Greenfoot.mouseMoved(null)) 
+        {
+            MouseInfo mouse=Greenfoot.getMouseInfo();
+            targetx=mouse.getX();
+            targety=mouse.getY();
+        }//end if
+        move();
+        
+        if(thanos > 0)
+        {
+            thanos--;
+        }// end if
+        if(thanos==1)
+        {
+            getWorld().addObject(new Beam(), getX()+90,getY());
+        }// end if
+        if(thanos==0)
+        {
+            thanos=49;
+        }// end if
+        
+        
+        
+        
+    }//end act method
+    
+    
+    
+}// end class Rocket
