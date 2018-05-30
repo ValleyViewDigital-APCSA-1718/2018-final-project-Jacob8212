@@ -1,0 +1,54 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Rock here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Rock extends Actor
+{
+    private int death = 0;
+    private boolean toRemove = false;
+    
+    public Rock(int d)
+    {
+        death = d;
+    }// end Rock constructor
+    
+    public void addedToWorld(World Space)
+    {
+        setRotation(180);
+    }// end addedToWorld
+    
+    public void move()
+    {
+        setLocation(getX() + death, getY());
+        if(getX() < -200)
+        {
+            toRemove = true;
+        }// end if
+    }// end move method
+    
+    public void act() 
+    {
+        if(!toRemove)
+        {
+         move();
+         Actor crash = getOneIntersectingObject(Rocket.class);
+          if( crash != null )
+          {
+             
+           removeTouching(Rocket.class);
+          }// end if
+         
+              
+       }// end if  
+       else
+       {
+           getWorld().removeObject(this);
+       }// end else
+       
+       
+    }// end act method
+}// end class Rock
