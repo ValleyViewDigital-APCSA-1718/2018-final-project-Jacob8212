@@ -1,0 +1,46 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Rock here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Beam extends Actor
+{
+    private boolean toRemove = false;
+    private int vx = 5;
+    
+    public void addedToWorld(World MyWorld)
+    {
+        GreenfootImage image = new GreenfootImage(50,10);
+        image.setColor(Color.YELLOW);
+        image.drawLine(0,5,image.getWidth()-1,5);
+        setImage(image);
+    }// end addedToWorld
+    
+    public void act() 
+    {
+        if(!toRemove)
+        {
+            setLocation(getX() + vx, getY());
+            Actor actor = getOneIntersectingObject(Rock.class);
+            if(actor != null)
+            {
+                removeTouching(Rock.class);
+            }// end if
+            
+            if(getX()> getWorld().getWidth()+ 200) 
+            {
+                toRemove = true;
+            }
+        }// end if
+        else
+        {
+            getWorld().removeObject(this);
+        }// end else
+        
+        
+        
+    }// end act method
+}// end class Beam
