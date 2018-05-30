@@ -1,0 +1,43 @@
+/**
+ * Jacob Navarro
+ * CSA Game
+ * Period 4
+ */
+public class Space extends World
+{
+
+    private int force = 0;
+    
+    public Space()
+    {    
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        super(600, 400, 1, false); 
+        
+        
+        
+        addObject(new Rocket(),90, 200);
+        
+    }// end Space constructor
+    
+    public void act()
+    {
+        if(force>0) 
+        {
+            force--;
+        }// end if
+        else 
+        {
+            force = 20;
+        }// end else
+        
+        if (force == 1 )
+        {
+            int py = Greenfoot.getRandomNumber(getHeight());
+            addObject(new Rock(-(2 + Greenfoot.getRandomNumber(3))), getWidth() + 200, py);
+        }// end else if
+        
+        
+    }// end act method
+    
+    
+}// end class Space
